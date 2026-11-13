@@ -18,17 +18,18 @@ to its own location, including paths containing spaces.
 | Bundle | Supported runtime platform |
 | --- | --- |
 | `linux-x64.tar.gz` | glibc Linux x64: upstream lists Ubuntu 18.04+, Debian 10+, RHEL/Rocky/AlmaLinux 8+, Amazon Linux 2/2023 |
+| `linux-arm64.tar.gz` | glibc Linux ARM64: upstream lists Ubuntu 18.04+, Debian 10+, RHEL/Rocky/AlmaLinux 8+, Amazon Linux 2/2023 |
 | `darwin-arm64.tar.gz` | macOS 15+ on Apple Silicon |
 
-Alpine/musl, Windows, Linux ARM64, and macOS Intel are not supported.
+Alpine/musl, Windows, and macOS Intel are not supported.
 See [upstream Perl support](licenses/relocatable-perl/SUPPORT.md).
 
 ## Installation
 
 The package is distributed through GitHub Packages.
-Binary artifacts are published in [vendors-v1.0.1](https://github.com/leandreDev/leandre-vendors-bin/releases/tag/vendors-v1.0.1).
-Both platform archives include Pandoc, ExifTool and a portable Perl runtime.
-npm `1.0.0` uses `vendors-v1.0.1` with reduced Perl and ExifTool runtimes.
+Binary artifacts are published in [vendors-v1.1.0](https://github.com/leandreDev/leandre-vendors-bin/releases/tag/vendors-v1.1.0).
+All three platform archives include Pandoc, ExifTool and a portable Perl runtime.
+npm `1.1.0` adds Linux ARM64 and uses `vendors-v1.1.0` with reduced Perl and ExifTool runtimes.
 The release also includes licenses, SHA-256 checksums and upstream sources.
 
 Configure the consuming project's `.npmrc`:
@@ -45,7 +46,7 @@ npm install @leandredev/leandre-vendors-bin
 ```
 
 The `postinstall` script detects the OS and architecture, downloads one archive
-from `https://github.com/leandreDev/leandre-vendors-bin/releases/download/vendors-v1.0.1/`,
+from `https://github.com/leandreDev/leandre-vendors-bin/releases/download/vendors-v1.1.0/`,
 verifies its pinned SHA-256, and extracts it into `bin/` in the installed package.
 A pinned manifest verifies every bundled file, including Perl and ExifTool modules.
 A complete installation is reused only when every file passes verification.
@@ -148,12 +149,17 @@ npm run restore:artifacts
 ```
 
 This command selects the latest published, non-prerelease GitHub release, downloads
-**both** platform archives, checks GitHub digests, `SHA256SUMS`, and every file in
+**all three** platform archives, checks GitHub digests, `SHA256SUMS`, and every file in
 the manifests, then recreates:
 
 ```text
 artifact-src/
 ├── linux-x64/
+│   ├── pandoc
+│   ├── exiftool
+│   ├── exiftool-runtime/
+│   └── perl/
+├── linux-arm64/
 │   ├── pandoc
 │   ├── exiftool
 │   ├── exiftool-runtime/
@@ -183,13 +189,14 @@ Put a compatible version of the tool in **each** platform directory, for example
 
 ```text
 artifact-src/linux-x64/new-tool
+artifact-src/linux-arm64/new-tool
 artifact-src/darwin-arm64/new-tool
 ```
 
 Preserve the executable permission:
 
 ```sh
-chmod +x artifact-src/linux-x64/new-tool artifact-src/darwin-arm64/new-tool
+chmod +x artifact-src/{linux-x64,linux-arm64,darwin-arm64}/new-tool
 ```
 
 Include any shared libraries, modules or portable runtime the tool requires in
@@ -228,7 +235,7 @@ npm run build:artifacts -- --release vendors-v1.1.0
 npm version minor --no-git-tag-version
 ```
 
-The build generates both platform archives, manifests, license summary and
+The build generates all three platform archives, manifests, license summary and
 `SHA256SUMS` in `.artifacts/`. It updates `scripts/bundles.json` with the archive
 and manifest hashes and sets `package.json` → `vendorRelease` to the new tag.
 The installer uses this fixed tag; installed npm versions never follow `latest`.
@@ -240,7 +247,7 @@ By default the build reads `artifact-src/`. For a separate restored directory:
 npm run build:artifacts -- --release vendors-v1.1.0 --source-directory .artifacts/restored-inputs
 ```
 
-Verify execution of the tools on both target platforms, including the new tool,
+Verify execution of the tools on all available target platforms, including the new tool,
 then check the npm payload:
 
 ```sh
@@ -262,8 +269,9 @@ Create the release from that commit, using the tag selected above:
 gh release create vendors-v1.1.0 --repo leandreDev/leandre-vendors-bin \
   --target "$(git rev-parse HEAD)" \
   --title "Vendor binaries v1.1.0" \
-  --notes "Add new-tool for Linux x64 and macOS ARM64." \
+  --notes "Add new-tool for Linux x64, Linux ARM64 and macOS ARM64." \
   .artifacts/linux-x64.tar.gz \
+  .artifacts/linux-arm64.tar.gz \
   .artifacts/darwin-arm64.tar.gz \
   .artifacts/THIRD_PARTY_LICENSES.md \
   .artifacts/third-party-sources.tar.gz \

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build both release bundles from artifact-src and update their pinned hashes."""
+"""Build all release bundles from artifact-src and update their pinned hashes."""
 from pathlib import Path
 import argparse
 import gzip
@@ -12,7 +12,7 @@ from perl_runtime import keep_perl_file
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / '.artifacts'
 SOURCE = ROOT / 'artifact-src'
-PLATFORMS = ('linux-x64', 'darwin-arm64')
+PLATFORMS = ('linux-x64', 'linux-arm64', 'darwin-arm64')
 SOURCE_ARCHIVE_SUFFIXES = ('.tar.gz', '.tar.xz', '.tar.bz2', '.tar.zst', '.tgz', '.zip', '.7z')
 LAUNCHER = b'''#!/bin/sh
 set -eu
@@ -64,7 +64,7 @@ def build(platform):
             raise ValueError(f'Missing required input: {source}/{required}')
     for file in sorted((ROOT / 'licenses').rglob('*')):
         if file.is_file() and not file.name.endswith(SOURCE_ARCHIVE_SUFFIXES):
-            if platform != 'linux-x64' and file.relative_to(ROOT / 'licenses').parts[0] == 'libxcrypt':
+            if not platform.startswith('linux-') and file.relative_to(ROOT / 'licenses').parts[0] == 'libxcrypt':
                 continue
             files[file.relative_to(ROOT).as_posix()] = (file.read_bytes(), 0o644)
     files['THIRD_PARTY_LICENSES.md'] = ((ROOT / 'THIRD_PARTY_LICENSES.md').read_bytes(), 0o644)
@@ -99,7 +99,7 @@ if __name__ == '__main__':
         package['vendorRelease'] = args.release
         package_file.write_text(json.dumps(package, indent=2) + '\n')
     (OUT / 'THIRD_PARTY_LICENSES.md').write_bytes((ROOT / 'THIRD_PARTY_LICENSES.md').read_bytes())
-    checksum_files = ['linux-x64.tar.gz', 'darwin-arm64.tar.gz', 'THIRD_PARTY_LICENSES.md']
+    checksum_files = [f'{platform}.tar.gz' for platform in PLATFORMS] + ['THIRD_PARTY_LICENSES.md']
     if (OUT / 'third-party-sources.tar.gz').exists():
         checksum_files.append('third-party-sources.tar.gz')
     (OUT / 'SHA256SUMS').write_text(''.join(

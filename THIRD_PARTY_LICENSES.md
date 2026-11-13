@@ -2,7 +2,7 @@
 
 ## Pandoc 3.6.3
 
-- Binary: `pandoc`, distributed in `linux-x64.tar.gz` and `darwin-arm64.tar.gz`.
+- Binary: `pandoc`, distributed in `linux-x64.tar.gz`, `linux-arm64.tar.gz` and `darwin-arm64.tar.gz`.
 - Copyright (C) 2006-2024 John MacFarlane and the contributors listed in the upstream notices.
 - License: GNU General Public License, version 2 or later (`GPL-2.0-or-later`), with the component notices and exceptions documented in `licenses/pandoc/COPYRIGHT`.
 - Project: https://pandoc.org
@@ -10,6 +10,7 @@
 - Source code: https://github.com/jgm/pandoc/tree/3.6.3
 - Source archive: https://github.com/jgm/pandoc/archive/refs/tags/3.6.3.tar.gz
 - Linux upstream binary package: https://github.com/jgm/pandoc/releases/download/3.6.3/pandoc-3.6.3-linux-amd64.tar.gz
+- Linux ARM64 upstream binary package: https://github.com/jgm/pandoc/releases/download/3.6.3/pandoc-3.6.3-linux-arm64.tar.gz
 - macOS upstream binary package: https://github.com/jgm/pandoc/releases/download/3.6.3/pandoc-3.6.3-arm64-macOS.zip
 
 The complete upstream copyright notices and GPL text are included in
@@ -17,7 +18,7 @@ The complete upstream copyright notices and GPL text are included in
 archive. These notices apply to the bundled third-party software independently
 of the license of the future npm installer.
 
-Only Linux x64 and macOS Apple Silicon binaries are provided in this release.
+Linux x64, Linux ARM64 and macOS Apple Silicon binaries are provided in this release.
 Windows and macOS Intel binaries are not included.
 
 ## ExifTool 13.63
@@ -61,13 +62,13 @@ Windows and macOS Intel binaries are not included.
 - License: LGPL version 2.1 or later, with additional compatible notices for
   individual source files; see `licenses/libxcrypt/COPYING.LIB` and `LICENSING`.
 - Individual source-file notices are retained in
-  `licenses/libxcrypt/SOURCE-NOTICES.txt` in the Linux bundle.
+  `licenses/libxcrypt/SOURCE-NOTICES.txt` in the Linux bundles.
 - Complete upstream source remains in the repository at
   `licenses/libxcrypt/libxcrypt-4.5.2.tar.xz` and in the GitHub release asset
   `third-party-sources.tar.gz`. Source archives are not installed.
 - Release source download (matching the installed npm package’s vendorRelease):
   https://github.com/leandreDev/leandre-vendors-bin/releases
-- The libxcrypt notices are included only in the Linux bundle.
+- The libxcrypt notices are included only in the Linux bundles.
 - Source: https://github.com/besser82/libxcrypt/releases/tag/v4.5.2
 - The upstream relocatable-perl build scripts linked above describe the static
   build and can be used to rebuild Perl against a modified libxcrypt.

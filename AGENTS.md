@@ -7,7 +7,7 @@ Packages. Its only runtime job is to detect the platform, download a fixed GitHu
 release archive, verify its integrity, and install its contents into the package's
 `bin/` directory. Do not add a JavaScript API or `getBinaryPath` methods.
 
-Supported bundles are `linux-x64` and `darwin-arm64`. Preserve existing tools and
+Supported bundles are `linux-x64`, `linux-arm64` and `darwin-arm64`. Preserve existing tools and
 their runtime files when adding another tool. ExifTool must use bundled Perl;
 added tools must not rely on a developer's Homebrew installation or absolute
 machine-specific paths. Keep the documented platform requirements accurate.
@@ -34,7 +34,7 @@ package.json and git status before changing files. Preserve unrelated work.
 ## Adding or updating a tool
 
 1. Requirements: Node.js 22+, Python 3.11+, tar, and an authenticated GitHub CLI.
-   From a fresh checkout, run `npm run restore:artifacts`. It restores BOTH
+   From a fresh checkout, run `npm run restore:artifacts`. It restores ALL THREE
    platforms from the latest published GitHub release and verifies the archives
    and their file manifests.
 2. If artifact-src/ already exists, inspect and preserve it. Restoration must not
@@ -63,7 +63,7 @@ package.json and git status before changing files. Preserve unrelated work.
 6. For a new binary release, choose an unused tag and run:
    `npm run build:artifacts -- --release vendors-vX.Y.Z`.
    Use `--source-directory .artifacts/restored-inputs` for separately restored
-   inputs. The build generates both archives and SHA256SUMS, updates
+   inputs. The build generates all three archives and SHA256SUMS, updates
    scripts/bundles.json, and sets package.json vendorRelease.
 7. For a new npm publication, bump package.json and package-lock.json together,
    for example with `npm version minor --no-git-tag-version`. Choose the version
@@ -73,7 +73,7 @@ package.json and git status before changing files. Preserve unrelated work.
 ## Verification
 
 - Verify archive SHA-256 values, pinned manifest hashes and manifest entries.
-- Verify new executables, runtime files and executable permissions in BOTH
+- Verify new executables, runtime files and executable permissions in ALL THREE
   archives. Confirm existing tools remain present.
 - Run the affected tools on each target platform available to you. Clearly report
   any platform that was only inspected and not executed; do not claim Linux
@@ -95,7 +95,7 @@ again for an already authorized publication.
 
 Publish the binary assets to GitHub BEFORE publishing the npm package. Follow the
 README commands, using the newly selected tag and a pushed source commit. Include
-both platform archives, notices, SHA256SUMS and updated upstream sources.
+all three platform archives, notices, SHA256SUMS and updated upstream sources.
 
 The npm installer must remain pinned to package.json vendorRelease and the hashes
 in scripts/bundles.json. Never use latest for runtime installation, replace assets

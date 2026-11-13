@@ -21,7 +21,7 @@ def keep_perl_file(relative):
         return False
     # Layout: perl/lib/<version>/[<architecture>/]<module-or-data>.
     library = Path(*parts[3:])
-    if library.parts[0] in ('darwin-2level', 'x86_64-linux'):
+    if library.parts[0] in ('darwin-2level', 'x86_64-linux', 'aarch64-linux'):
         library = Path(*library.parts[1:])
     name = library.as_posix()
     if library.suffix in ('.pod', '.h', '.a', '.c') or 'CORE' in library.parts:

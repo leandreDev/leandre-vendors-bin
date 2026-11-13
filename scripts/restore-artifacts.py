@@ -11,7 +11,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parent.parent
 REPOSITORY = 'leandreDev/leandre-vendors-bin'
-PLATFORMS = ('linux-x64', 'darwin-arm64')
+PLATFORMS = ('linux-x64', 'linux-arm64', 'darwin-arm64')
 METADATA = {'manifest.json', 'THIRD_PARTY_LICENSES.md', 'licenses'}
 
 

@@ -34,5 +34,17 @@
     "version": "4.5.2",
     "url": "https://github.com/besser82/libxcrypt/releases/download/v4.5.2/libxcrypt-4.5.2.tar.xz",
     "sha256": "71513a31c01a428bccd5367a32fd95f115d6dac50fb5b60c779d5c7942aec071"
+  },
+  {
+    "name": "Perl linux-arm64",
+    "version": "5.44.0.0",
+    "url": "https://github.com/skaji/relocatable-perl/releases/download/5.44.0.0/perl-linux-arm64.tar.gz",
+    "sha256": "b1a3aa7be1ea0239a29e503b63a52a694371670d4dc535c716d9a16ea2aaa453"
+  },
+  {
+    "name": "Pandoc linux-arm64",
+    "version": "3.6.3",
+    "url": "https://github.com/jgm/pandoc/releases/download/3.6.3/pandoc-3.6.3-linux-arm64.tar.gz",
+    "sha256": "4e774cb1bdb6e56bc55b8eb79200bd9aa6a39905a04ecda7267f5149116f0881"
   }
 ]

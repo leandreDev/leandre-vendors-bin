@@ -28,7 +28,7 @@ See [upstream Perl support](licenses/relocatable-perl/SUPPORT.md).
 The package is distributed through GitHub Packages.
 Binary artifacts are published in [vendors-v1.0.1](https://github.com/leandreDev/leandre-vendors-bin/releases/tag/vendors-v1.0.1).
 Both platform archives include Pandoc, ExifTool and a portable Perl runtime.
-npm `0.1.1` uses `vendors-v1.0.1` with reduced Perl and ExifTool runtimes.
+npm `1.0.0` uses `vendors-v1.0.1` with reduced Perl and ExifTool runtimes.
 The release also includes licenses, SHA-256 checksums and upstream sources.
 
 Configure the consuming project's `.npmrc`:

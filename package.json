@@ -1,6 +1,6 @@
 {
   "name": "@leandredev/leandre-vendors-bin",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Platform-specific third-party binaries for Leandre projects",
   "files": [
     "scripts/install.js",

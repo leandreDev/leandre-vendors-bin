@@ -1,0 +1,32 @@
+{
+  "name": "@leandredev/leandre-vendors-bin",
+  "version": "0.1.1",
+  "description": "Platform-specific third-party binaries for Leandre projects",
+  "files": [
+    "scripts/install.js",
+    "scripts/platform.js",
+    "scripts/bundles.json"
+  ],
+  "scripts": {
+    "postinstall": "node scripts/install.js",
+    "install:vendors": "node scripts/install.js",
+    "build:artifacts": "python3 scripts/build-artifacts.py",
+    "restore:artifacts": "python3 scripts/restore-artifacts.py"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leandreDev/leandre-vendors-bin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/leandreDev/leandre-vendors-bin/issues"
+  },
+  "homepage": "https://github.com/leandreDev/leandre-vendors-bin#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "license": "UNLICENSED",
+  "vendorRelease": "vendors-v1.0.1"
+}

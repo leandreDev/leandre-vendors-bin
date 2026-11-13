@@ -147,3 +147,13 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Vendor binary inputs and prepared release assets
+/artifact-src/
+/.artifacts/
+/bin/
+/.vendor-install-*/
+
+# Python maintenance-script cache
+__pycache__/
+*.py[cod]

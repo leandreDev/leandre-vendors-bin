@@ -1,0 +1,10 @@
+{
+  "linux-x64": {
+    "archiveSha256": "8e940bac079ddf8fc257e9bfbee5c16ddb701f6746c0d61af6b7e8b783ada37f",
+    "manifestSha256": "ef9f5b74641006fea7ef2d137297c671a43b26d20b6c8cc429fd6defc60b65d5"
+  },
+  "darwin-arm64": {
+    "archiveSha256": "e1cca531ad4c1b18ec4168441c10c165b3385f31a289afba73c7cbe8d166c328",
+    "manifestSha256": "9bac6ede58bc5f6de67c6aa9ea3653611f7ef5a70ce22bf0ae2214fe89b9b2f0"
+  }
+}

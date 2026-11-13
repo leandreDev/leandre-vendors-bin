@@ -1,0 +1,38 @@
+[
+  {
+    "name": "ExifTool",
+    "version": "13.63",
+    "url": "https://api.github.com/repos/exiftool/exiftool/tarball/1da714924f67763b6a8a7013dd2aa1983a16f87b",
+    "sha256": "81f7edaf9ef6d87ac332dd8f86d6e145dede156f1b8bdaf636752928ffcac6ad"
+  },
+  {
+    "name": "Perl linux-x64",
+    "version": "5.44.0.0",
+    "url": "https://github.com/skaji/relocatable-perl/releases/download/5.44.0.0/perl-linux-amd64.tar.gz",
+    "sha256": "99fa984bab4eb536dae9630d5d47f3f5bd23a71c361d94dc6ef3a68a7186dcb0"
+  },
+  {
+    "name": "Perl darwin-arm64",
+    "version": "5.44.0.0",
+    "url": "https://github.com/skaji/relocatable-perl/releases/download/5.44.0.0/perl-darwin-arm64.tar.gz",
+    "sha256": "213733e18662720a3d25fd6e1adeddd05f56ce50b5e1f8bc6bd194e3f43e44d2"
+  },
+  {
+    "name": "Pandoc linux-x64",
+    "version": "3.6.3",
+    "url": "https://github.com/jgm/pandoc/releases/download/3.6.3/pandoc-3.6.3-linux-amd64.tar.gz",
+    "sha256": "d04c95c138202f87d6b00ac19aa3dd874c681f60a9feb3b55c74f764d6d1a17d"
+  },
+  {
+    "name": "Pandoc darwin-arm64",
+    "version": "3.6.3",
+    "url": "https://github.com/jgm/pandoc/releases/download/3.6.3/pandoc-3.6.3-arm64-macOS.zip",
+    "sha256": "1d76cd76b703ff758f90f6929bd5f634bc50fc76ad375a9d19a5d365cd8233fc"
+  },
+  {
+    "name": "libxcrypt",
+    "version": "4.5.2",
+    "url": "https://github.com/besser82/libxcrypt/releases/download/v4.5.2/libxcrypt-4.5.2.tar.xz",
+    "sha256": "71513a31c01a428bccd5367a32fd95f115d6dac50fb5b60c779d5c7942aec071"
+  }
+]

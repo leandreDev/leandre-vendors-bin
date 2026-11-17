@@ -141,8 +141,10 @@ GitHub Packages.
 
 `artifact-src/` is a local working directory, ignored by Git and excluded from the
 npm package through the `files` allowlist. Do not commit it. `.artifacts/` and the
-installed `bin/` directory are excluded too. Only scripts, package metadata,
-checksums, provenance, documentation and license files belong in Git.
+installed `bin/` directory are excluded too. Scripts, tests and their fixtures,
+package metadata, checksums, provenance, documentation and license files belong
+in Git. Keep `test/` out of the npm tarball and binary release bundles: the
+published package contains only the runtime installer, package metadata and README.
 
 ### 1. Restore the latest released binaries
 
@@ -213,6 +215,17 @@ its executable permissions and SHA-256. No public JavaScript API is needed.
 It also accepts the original input layout where `exiftool/` contains the upstream
 application; restored bundles already use the final launcher/runtime layout.
 
+Every new binary must have functional CLI tests in
+`test/<binary>/binaire.spec.ts` and committed local fixtures under
+`test/resources/`. Test representative operations and verify both successful
+exit status and meaningful output or generated file contents; a version check
+or TODO alone is not sufficient. Use the installed bundle through
+`VENDOR_BIN_DIR`, preserve fixtures and clean up temporary outputs. Tests must
+run in the shared Docker container without network access and through the same
+GitHub Actions workflow. Extend the affected tests when updating a binary or
+its runtime dependencies. See [test/README.md](test/README.md) for the structure
+and local execution command (`npm test`, with Docker running).
+
 Update `THIRD_PARTY_LICENSES.md`, add the upstream notices under `licenses/`,
 and record the tool version, source URL and download checksum in
 `artifact-sources.json`. Keep the source distributions required for the release.
@@ -251,22 +264,32 @@ By default the build reads `artifact-src/`. For a separate restored directory:
 npm run build:artifacts -- --release vendors-v1.1.0 --source-directory .artifacts/restored-inputs
 ```
 
-Verify execution of the tools on all available target platforms, including the new tool,
-then check the npm payload:
+Run the affected specs against the newly built bundles on all available target
+platforms before publishing binary assets. Report any platforms that were only
+inspected, not executed. After publishing the new binary release and before npm
+publication, run `npm test` to verify installation from that pinned release and
+the complete offline test suite. Docker image preparation requires network
+access; the test container runs with `--network none`. Report GitHub Actions
+results separately from local checks.
+
+Check the npm payload:
 
 ```sh
 npm pack --dry-run
 ```
 
-Confirm that `artifact-src/`, `.artifacts/` and `bin/` are absent from the payload.
+Confirm that `artifact-src/`, `.artifacts/`, `bin/`, `test/` and maintenance scripts
+are absent from the payload. Tests and fixtures stay in the repository so that
+consumers install only the runtime files they need. Keep the existing package.json
+`files` allowlist limited to installer files.
 The npm tarball contains the installer, package metadata and README. License
 notices accompany the downloaded binaries under `bin/`; there is no duplicate
 license tree at the npm package root and no source archive is installed.
 
 ### 4. Publish the binary release, then the npm package
 
-Commit and push the updated package files, scripts, checksums, documentation,
-provenance and licenses. Keep `artifact-src/` and `.artifacts/` untracked.
+Commit and push the updated package files, scripts, tests and fixtures, checksums,
+documentation, provenance and licenses. Keep `artifact-src/` and `.artifacts/` untracked.
 Create the release from that commit, using the tag selected above:
 
 ```sh

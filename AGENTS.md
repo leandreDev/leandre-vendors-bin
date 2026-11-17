@@ -28,6 +28,9 @@ package.json and git status before changing files. Preserve unrelated work.
   Keep source distributions in the separate GitHub source asset; retain per-file
   libxcrypt notices in the Linux bundle. Maintenance scripts and this file belong
   in the repository only.
+- Track test specs, fixtures, the Dockerfile and test runner under `test/` in Git.
+  Keep all of `test/` out of the npm tarball and binary release bundles. Tests are
+  development tools, not part of the installed package's runtime contract.
 - Commit scripts, generated pinned hashes, package metadata, documentation,
   provenance and required license notices. Never commit registry credentials.
 
@@ -56,16 +59,26 @@ package.json and git status before changing files. Preserve unrelated work.
    Preserve executable permissions. The builder includes new files automatically;
    do not create an npm API to expose them. Keep launchers relative to their own
    location and support paths containing spaces.
-5. Update THIRD_PARTY_LICENSES.md, licenses/, and artifact-sources.json with the
+5. Every new binary must include functional CLI tests in
+   `test/<binary>/binaire.spec.ts`, with committed local fixtures under
+   `test/resources/`. A version check or TODO alone is not sufficient: execute
+   representative operations and assert successful exit status and meaningful
+   output or generated file contents. Extend affected tests when updating a tool
+   or its runtime dependencies. Use the installed bundle via `VENDOR_BIN_DIR`,
+   not a system-installed tool. Keep fixtures unchanged and clean up temporary
+   outputs. Tests must run without network access through the shared Docker
+   runner and GitHub Actions; never download sources, tools or fixtures during
+   test execution. Docker is required to run `npm test` locally.
+6. Update THIRD_PARTY_LICENSES.md, licenses/, and artifact-sources.json with the
    exact version, source URL, checksum and copyright/license notices. Update the
    combined `.artifacts/third-party-sources.tar.gz` and its internal checksums as
    documented in README.md; retain sources for tools still present.
-6. For a new binary release, choose an unused tag and run:
+7. For a new binary release, choose an unused tag and run:
    `npm run build:artifacts -- --release vendors-vX.Y.Z`.
    Use `--source-directory .artifacts/restored-inputs` for separately restored
    inputs. The build generates all three archives and SHA256SUMS, updates
    scripts/bundles.json, and sets package.json vendorRelease.
-7. For a new npm publication, bump package.json and package-lock.json together,
+8. For a new npm publication, bump package.json and package-lock.json together,
    for example with `npm version minor --no-git-tag-version`. Choose the version
    increment appropriate to the change; README versions are examples, not fixed
    release targets.
@@ -78,9 +91,15 @@ package.json and git status before changing files. Preserve unrelated work.
 - Run the affected tools on each target platform available to you. Clearly report
   any platform that was only inspected and not executed; do not claim Linux
   execution from a macOS check.
-- Run `npm pack --dry-run` and confirm artifact-src/, .artifacts/, bin/, and
-  maintenance scripts are absent. Run `git diff --check` and confirm no binary
-  input or generated output was added to Git.
+- Run the affected specs against the new bundles before releasing binary assets.
+  Before npm publication, run `npm test` against the newly published, pinned
+  binary release. The Docker build installs the locally packed npm module with
+  network access; test containers must use `--network none`. Report local and
+  GitHub Actions results separately; do not claim CI ran unless it did.
+- Run `npm pack --dry-run` and confirm artifact-src/, .artifacts/, bin/, test/,
+  and maintenance scripts are absent. Run `git diff --check` and confirm no
+  artifact-src/, .artifacts/ or bin/ content was added to Git. Intentionally
+  versioned test fixtures under `test/resources/` are allowed.
 - For an authorized publication, install the published version in a separate
   project and execute the tools from its node_modules package bin/ directory.
   If npm blocks postinstall, approve this dependency in that test project with

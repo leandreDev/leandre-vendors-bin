@@ -14,7 +14,7 @@ test/
 ├── resources/
 │   ├── img1.png
 │   ├── pdf1.pdf
-│   └── word1.docx
+│   └── docx1.docx
 └── exiftool/
     └── binaire.spec.ts
 ```

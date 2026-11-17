@@ -46,7 +46,7 @@ test('ExifTool extracts PDF metadata', () => {
 });
 
 test('ExifTool extracts Word DOCX metadata', () => {
-  const metadata = extractMetadata('word1.docx');
+  const metadata = extractMetadata('docx1.docx');
 
   assert.equal(metadata.Warning, undefined, String(metadata.Warning));
   assert.equal(metadata.FileType, 'DOCX');

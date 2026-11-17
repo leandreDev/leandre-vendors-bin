@@ -56,6 +56,24 @@ Windows and macOS Intel binaries are not included.
   App::cpanminus and App::ChangeShebang are not redistributed.
 - Runtime platform support is documented in `licenses/relocatable-perl/SUPPORT.md`.
 
+## Archive::Zip 1.68
+
+- Provides compressed ZIP and Office Open XML metadata support for ExifTool.
+  The unmodified Perl modules are bundled under `perl/lib/5.44.0/Archive/`.
+- Copyright 2000-2004 Ned Konz, 2005 Steve Peters and 2006-2012 Adam Kennedy.
+  Additional module notices include Sreeji K. Das and the Info-ZIP contributors.
+- License: same terms as Perl (Perl Artistic License or GPL); see
+  `licenses/archive-zip/README.md`, `COPYRIGHT-NOTICES.txt`,
+  `licenses/perl/Artistic` and `licenses/perl/Copying`.
+- Decryption code is derived from Info-ZIP; its notices and license are retained
+  in `licenses/archive-zip/COPYRIGHT-NOTICES.txt` and `INFO-ZIP-LICENSE.txt`.
+  This is Archive::Zip, not an original Info-ZIP release.
+- Source: https://cpan.metacpan.org/authors/id/P/PH/PHRED/Archive-Zip-1.68.tar.gz
+- Complete sources are retained in the separate `third-party-sources.tar.gz`
+  release asset. No source archive is installed with the binaries.
+- Core `File::Copy` and `File::Find` dependencies come from the matching,
+  unchanged Perl 5.44.0 distribution and retain its license terms.
+
 ## libxcrypt 4.5.2 (Linux Perl runtime)
 
 - Statically linked into the upstream Linux Perl runtime; not included on macOS.

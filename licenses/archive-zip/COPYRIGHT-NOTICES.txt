@@ -1,0 +1,74 @@
+Archive/Zip/MemberRead.pm
+=head1 COPYRIGHT
+
+Copyright 2002 Sreeji K. Das.
+
+This program is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
+
+
+
+Archive/Zip/Tree.pm
+=head1 COPYRIGHT
+
+Copyright (c) 2000-2002 Ned Konz. All rights reserved.  This program is free
+software; you can redistribute it and/or modify it under the same terms
+as Perl itself.
+
+=head1 SEE ALSO
+
+L<Archive::Zip>
+
+
+
+Archive/Zip/Member.pm
+# Decrypt section
+#
+# H.Merijn Brand (Tux) 2011-06-28
+#
+# ##############################################################################
+
+# This code is derived from the crypt source of unzip-6.0 dated 05 Jan 2007
+# Its license states:
+#
+# --8<---
+# Copyright (c) 1990-2007 Info-ZIP.  All rights reserved.
+
+# See the accompanying file LICENSE, version 2005-Feb-10 or later
+# (the contents of which are also included in (un)zip.h) for terms of use.
+# If, for some reason, all these files are missing, the Info-ZIP license
+# also may be found at:  ftp://ftp.info-zip.org/pub/infozip/license.html
+#
+# crypt.c (full version) by Info-ZIP.      Last revised:  [see crypt.h]
+
+# The main encryption/decryption source code for Info-Zip software was
+# originally written in Europe.  To the best of our knowledge, it can
+# be freely distributed in both source and object forms from any country,
+# including the USA under License Exception TSU of the U.S. Export
+# Administration Regulations (section 740.13(e)) of 6 June 2002.
+
+# NOTE on copyright history:
+# Previous versions of this source package (up to version 2.8) were
+# not copyrighted and put in the public domain.  If you cannot comply
+# with the Info-Zip LICENSE, you may want to look for one of those
+# public domain versions.
+#
+# This encryption code is a direct transcription of the algorithm from
+# Roger Schlafly, described by Phil Katz in the file appnote.txt.  This
+# file (appnote.txt) is distributed with the PKZIP program (even in the
+# version without encryption capabilities).
+# -->8---
+
+# As of January 2000, US export regulations were amended to allow export
+# of free encryption source code from the US.  As of June 2002, these
+# regulations were further relaxed to allow export of encryption binaries
+# associated with free encryption source code.  The Zip 2.31, UnZip 5.52
+# and Wiz 5.02 archives now include full crypto source code.  As of the
+# Zip 2.31 release, all official binaries include encryption support; the
+# former "zcr" archives ceased to exist.
+# (Note that restrictions may still exist in other countries, of course.)
+
+# For now, we just support the decrypt stuff
+# All below methods are supposed to be private
+
+# use Data::Peek;

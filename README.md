@@ -10,6 +10,7 @@ Platform-specific third-party tools for Leandre projects, packaged as
 | Pandoc | 3.6.3 | `pandoc` |
 | ExifTool | 13.63 | `exiftool` (launcher), `exiftool-runtime/` (application and libraries) |
 | Perl | 5.44.0 | `perl/bin/perl` and `perl/lib/5.44.0/` |
+| Archive::Zip | 1.68 | `perl/lib/5.44.0/Archive/` (ExifTool ZIP/DOCX support) |
 
 ExifTool uses the included portable Perl runtime; system Perl is not required.
 The launcher preserves arguments and exit status and resolves its runtime relative
@@ -27,9 +28,10 @@ See [upstream Perl support](licenses/relocatable-perl/SUPPORT.md).
 ## Installation
 
 The package is distributed through GitHub Packages.
-Binary artifacts are published in [vendors-v1.1.0](https://github.com/leandreDev/leandre-vendors-bin/releases/tag/vendors-v1.1.0).
+Binary artifacts are published in [vendors-v1.1.1](https://github.com/leandreDev/leandre-vendors-bin/releases/tag/vendors-v1.1.1).
 All three platform archives include Pandoc, ExifTool and a portable Perl runtime.
-npm `1.1.0` adds Linux ARM64 and uses `vendors-v1.1.0` with reduced Perl and ExifTool runtimes.
+npm `1.1.1` uses `vendors-v1.1.1` and adds Archive::Zip with its core dependencies
+to enable compressed ZIP and DOCX metadata extraction on all three platforms.
 The release also includes licenses, SHA-256 checksums and upstream sources.
 
 Configure the consuming project's `.npmrc`:
@@ -46,7 +48,7 @@ npm install @leandredev/leandre-vendors-bin
 ```
 
 The `postinstall` script detects the OS and architecture, downloads one archive
-from `https://github.com/leandreDev/leandre-vendors-bin/releases/download/vendors-v1.1.0/`,
+from `https://github.com/leandreDev/leandre-vendors-bin/releases/download/vendors-v1.1.1/`,
 verifies its pinned SHA-256, and extracts it into `bin/` in the installed package.
 A pinned manifest verifies every bundled file, including Perl and ExifTool modules.
 A complete installation is reused only when every file passes verification.
@@ -118,10 +120,12 @@ It excludes build headers, static libraries, POD manuals, test frameworks and
 unrelated core modules. Original inputs are left intact; restored bundles may
 already contain the reduced runtime.
 
-The profile is specific to ExifTool 13.63 / Perl 5.44.0. Review it when upgrading
-either tool or adding another Perl application. ExifTool modules, formats and
-languages are retained. Optional CPAN modules absent from the original runtime
-remain absent. Custom ExifTool configurations that load unrelated Perl modules
+The profile is specific to ExifTool 13.63 / Perl 5.44.0 / Archive::Zip 1.68.
+Archive::Zip modules and their core File::Copy/File::Find dependencies are
+retained for compressed ZIP and Office Open XML metadata. Review the profile
+when upgrading these tools or adding another Perl application. ExifTool modules,
+formats and languages are retained. Other optional CPAN modules absent from the
+original runtime remain absent. Custom ExifTool configurations that load unrelated Perl modules
 may need the profile extended. Keep the filter and profile in Git; neither is
 included in the npm package.
 
@@ -287,6 +291,15 @@ npm version: previous npm versions depend on their pinned hashes.
 Finally, install the new npm version in a separate test project, approve lifecycle
 scripts if required, and run the executables directly from its installed `bin/`.
 For the next addition, repeat the workflow starting with `npm run restore:artifacts`.
+
+## Offline binary tests
+
+The Docker and GitHub Actions test setup is documented in [test/README.md](test/README.md).
+Run `npm test`: Docker installs the locally packed module and its pinned binaries,
+then runs the tests without network access. No manually extracted bundle is needed.
+Each binary has a `test/<binary>/binaire.spec.ts`; shared fixtures live in
+`test/resources/`. Test containers run without network access. ExifTool tests
+verify metadata extraction from a local PNG image, a PDF document and a Word DOCX.
 
 ## Licenses
 

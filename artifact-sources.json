@@ -46,5 +46,11 @@
     "version": "3.6.3",
     "url": "https://github.com/jgm/pandoc/releases/download/3.6.3/pandoc-3.6.3-linux-arm64.tar.gz",
     "sha256": "4e774cb1bdb6e56bc55b8eb79200bd9aa6a39905a04ecda7267f5149116f0881"
+  },
+  {
+    "name": "Archive::Zip",
+    "version": "1.68",
+    "url": "https://cpan.metacpan.org/authors/id/P/PH/PHRED/Archive-Zip-1.68.tar.gz",
+    "sha256": "984e185d785baf6129c6e75f8eb44411745ac00bf6122fb1c8e822a3861ec650"
   }
 ]

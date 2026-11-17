@@ -58,3 +58,34 @@ test('ExifTool extracts Word DOCX metadata', () => {
   assert.ok(typeof metadata.Pages === 'number' && metadata.Pages > 0);
   assert.ok(typeof metadata.Words === 'number' && metadata.Words > 0);
 });
+
+test('ExifTool extracts Excel XLSX metadata', () => {
+  const metadata = extractMetadata('xlsx1.xlsx');
+
+  assert.equal(metadata.Warning, undefined, String(metadata.Warning));
+  assert.equal(metadata.FileType, 'XLSX');
+  assert.equal(
+    metadata.MIMEType,
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  );
+  assert.ok(typeof metadata.Application === 'string' && metadata.Application.length > 0);
+  assert.ok(Array.isArray(metadata.HeadingPairs), 'Expected spreadsheet metadata');
+  const worksheets = metadata.HeadingPairs.indexOf('Worksheets');
+  assert.ok(worksheets >= 0, 'Expected a worksheet count');
+  const count = metadata.HeadingPairs[worksheets + 1];
+  assert.ok(typeof count === 'number' && Number.isInteger(count) && count > 0);
+});
+
+test('ExifTool extracts PowerPoint PPTX metadata', () => {
+  const metadata = extractMetadata('pptx1.pptx');
+
+  assert.equal(metadata.Warning, undefined, String(metadata.Warning));
+  assert.equal(metadata.FileType, 'PPTX');
+  assert.equal(
+    metadata.MIMEType,
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  );
+  assert.ok(typeof metadata.Application === 'string' && metadata.Application.length > 0);
+  assert.ok(typeof metadata.Slides === 'number' && Number.isInteger(metadata.Slides) && metadata.Slides > 0);
+  assert.ok(typeof metadata.PresentationFormat === 'string' && metadata.PresentationFormat.length > 0);
+});

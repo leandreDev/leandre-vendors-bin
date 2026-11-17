@@ -299,7 +299,10 @@ Run `npm test`: Docker installs the locally packed module and its pinned binarie
 then runs the tests without network access. No manually extracted bundle is needed.
 Each binary has a `test/<binary>/binaire.spec.ts`; shared fixtures live in
 `test/resources/`. Test containers run without network access. ExifTool tests
-verify metadata extraction from a local PNG image, a PDF document and a Word DOCX.
+verify metadata extraction from local PNG, PDF, Word DOCX, Excel XLSX and
+PowerPoint PPTX files.
+Pandoc tests verify its version, HTML conversion, DOCX text extraction and
+generation, and PPTX generation, using local fixtures and temporary outputs.
 
 ## Licenses
 

@@ -1,10 +1,20 @@
 # Offline binary tests
 
-ExifTool tests execute the bundled CLI against local PNG, PDF and DOCX files, parse
-its JSON output and verify format-specific metadata: image dimensions, PDF
-version and page count, and Word application, page and word counts, in addition
-to the file type and MIME type. The DOCX test rejects extraction warnings,
-including missing ZIP support, rather than accepting generic ZIP metadata.
+ExifTool tests execute the bundled CLI against local PNG, PDF, DOCX, XLSX and
+PPTX files and parse its JSON output. They verify the file type and MIME type,
+plus format-specific metadata: image dimensions, PDF version and page count,
+Word application and page/word counts, Excel application and worksheet count,
+and PowerPoint application, slide count and presentation format. Office tests
+reject extraction warnings, including missing ZIP support, rather than accepting
+generic ZIP metadata.
+
+Pandoc tests verify its bundled version, Markdown-to-HTML formatting and Unicode,
+text extraction from the existing DOCX fixture, Markdown-to-DOCX round-trip text
+preservation, and generation of a two-slide PPTX. The generated PPTX is inspected
+with bundled ExifTool, and its actual slide parts and titles are checked using
+the bundled Perl ZIP runtime (the reference template's slide-count metadata can
+be stale). Generated files use temporary paths containing spaces and are removed
+after each test. The Markdown fixture contains no remote assets.
 
 ```text
 test/
@@ -14,8 +24,13 @@ test/
 ├── resources/
 │   ├── img1.png
 │   ├── pdf1.pdf
-│   └── docx1.docx
-└── exiftool/
+│   ├── docx1.docx
+│   ├── xlsx1.xlsx
+│   ├── pptx1.pptx
+│   └── pandoc.md
+├── exiftool/
+│   └── binaire.spec.ts
+└── pandoc/
     └── binaire.spec.ts
 ```
 

@@ -16,6 +16,17 @@ ExifTool uses the included portable Perl runtime; system Perl is not required.
 The launcher preserves arguments and exit status and resolves its runtime relative
 to its own location, including paths containing spaces.
 
+The `1.1.2` / `vendors-v1.1.2` bundles add a SQLite 3 metadata
+reader to ExifTool 13.63. It recognizes database contents (including `.db`,
+`.sqlite` and `.sqlite3`) and reads the page size, valid header page count,
+text encoding, schema/user versions, application ID and SQLite writer version.
+It reads only the 100-byte database header; it does not query table contents,
+validate the entire database, or merge uncheckpointed WAL data. Encrypted
+databases without the SQLite signature are not supported.
+The reader uses bundled Perl with no extra CPAN or system dependencies.
+Its source and build-time registration are under `scripts/exiftool/SQLite.pm`
+and `scripts/exiftool_sqlite.py`; original developer inputs are preserved.
+
 | Bundle | Supported runtime platform |
 | --- | --- |
 | `linux-x64.tar.gz` | glibc Linux x64: upstream lists Ubuntu 18.04+, Debian 10+, RHEL/Rocky/AlmaLinux 8+, Amazon Linux 2/2023 |
@@ -28,10 +39,10 @@ See [upstream Perl support](licenses/relocatable-perl/SUPPORT.md).
 ## Installation
 
 The package is distributed through GitHub Packages.
-Binary artifacts are published in [vendors-v1.1.1](https://github.com/leandreDev/leandre-vendors-bin/releases/tag/vendors-v1.1.1).
+Binary artifacts are published in [vendors-v1.1.2](https://github.com/leandreDev/leandre-vendors-bin/releases/tag/vendors-v1.1.2).
 All three platform archives include Pandoc, ExifTool and a portable Perl runtime.
-npm `1.1.1` uses `vendors-v1.1.1` and adds Archive::Zip with its core dependencies
-to enable compressed ZIP and DOCX metadata extraction on all three platforms.
+npm `1.1.2` uses `vendors-v1.1.2` and adds SQLite header metadata extraction
+on all three platforms while retaining Archive::Zip for ZIP and DOCX metadata.
 The release also includes licenses, SHA-256 checksums and upstream sources.
 
 Configure the consuming project's `.npmrc`:
@@ -48,7 +59,7 @@ npm install @leandredev/leandre-vendors-bin
 ```
 
 The `postinstall` script detects the OS and architecture, downloads one archive
-from `https://github.com/leandreDev/leandre-vendors-bin/releases/download/vendors-v1.1.1/`,
+from `https://github.com/leandreDev/leandre-vendors-bin/releases/download/vendors-v1.1.2/`,
 verifies its pinned SHA-256, and extracts it into `bin/` in the installed package.
 A pinned manifest verifies every bundled file, including Perl and ExifTool modules.
 A complete installation is reused only when every file passes verification.

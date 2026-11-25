@@ -1,6 +1,6 @@
 {
   "name": "@leandredev/leandre-vendors-bin",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Platform-specific third-party binaries for Leandre projects",
   "files": [
     "scripts/install.js",
@@ -29,5 +29,5 @@
     "registry": "https://npm.pkg.github.com"
   },
   "license": "UNLICENSED",
-  "vendorRelease": "vendors-v1.1.1"
+  "vendorRelease": "vendors-v1.1.2"
 }

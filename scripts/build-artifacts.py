@@ -8,6 +8,7 @@ import io
 import json
 import tarfile
 from perl_runtime import keep_perl_file
+from exiftool_sqlite import add_sqlite_reader
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / '.artifacts'
@@ -62,6 +63,7 @@ def build(platform):
     for required in ('pandoc', 'exiftool', 'perl/bin/perl', 'exiftool-runtime/exiftool'):
         if required not in files:
             raise ValueError(f'Missing required input: {source}/{required}')
+    add_sqlite_reader(files)
     for file in sorted((ROOT / 'licenses').rglob('*')):
         if file.is_file() and not file.name.endswith(SOURCE_ARCHIVE_SUFFIXES):
             if not platform.startswith('linux-') and file.relative_to(ROOT / 'licenses').parts[0] == 'libxcrypt':

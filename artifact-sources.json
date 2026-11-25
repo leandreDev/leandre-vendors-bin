@@ -52,5 +52,13 @@
     "version": "1.68",
     "url": "https://cpan.metacpan.org/authors/id/P/PH/PHRED/Archive-Zip-1.68.tar.gz",
     "sha256": "984e185d785baf6129c6e75f8eb44411745ac00bf6122fb1c8e822a3861ec650"
+  },
+  {
+    "name": "Leandre ExifTool SQLite reader",
+    "version": "1.0.0",
+    "url": "https://github.com/leandreDev/leandre-vendors-bin/blob/vendors-v1.1.2/scripts/exiftool/SQLite.pm",
+    "sha256": "bfbbc0d07226270d57ca5735529bb7104c2fe77380532859f7e22ac741db902c",
+    "integrationSource": "scripts/exiftool_sqlite.py",
+    "integrationSha256": "774c6d8dcff47060f5be75cf4756614eed1698b0d308314b7f2370da21601579"
   }
 ]

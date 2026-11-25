@@ -1,0 +1,13 @@
+Leandre ExifTool SQLite metadata reader 1.0.0
+Copyright 2026 Leandre.
+
+The SQLite reader and its build-time registration code are distributed under
+the same terms as Perl: the Perl Artistic License or the GNU General Public
+License, version 1 or later. See licenses/perl/Artistic and licenses/perl/Copying.
+
+This is a local extension to ExifTool 13.63, not an upstream ExifTool release.
+It reads SQLite 3 database headers using the bundled Perl runtime.
+Format documentation: https://www.sqlite.org/fileformat.html
+Sources: scripts/exiftool/SQLite.pm and scripts/exiftool_sqlite.py in
+https://github.com/leandreDev/leandre-vendors-bin
+The complete extension sources accompany third-party-sources.tar.gz.

@@ -34,7 +34,11 @@ Windows and macOS Intel binaries are not included.
 - The ExifTool application, complete module tree and runtime data (including the
   geolocation database) are included under `exiftool-runtime/`. Documentation,
   tests, examples and build scripts are omitted; retained application/module/data
-  bytes are unchanged. Complete upstream sources remain in the GitHub release
+  bytes are unchanged except for local SQLite file-type registration in
+  `Image/ExifTool.pm`. The added `Image/ExifTool/SQLite.pm` reader and registration
+  code are versioned under `scripts/` and covered by
+  `licenses/sqlite-reader/NOTICE.txt` (same terms as Perl). Complete upstream
+  sources and the local extension remain in the GitHub release
   asset `third-party-sources.tar.gz`. The custom `exiftool` shell launcher invokes
   the bundled Perl runtime.
 

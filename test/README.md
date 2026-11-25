@@ -8,6 +8,15 @@ and PowerPoint application, slide count and presentation format. Office tests
 reject extraction warnings, including missing ZIP support, rather than accepting
 generic ZIP metadata.
 
+The SQLite test uses `resources/test.db`, a real SQLite 3 database with a
+`documents` table containing two rows (including Unicode text), 4096-byte pages
+and `user_version = 1`. It requires successful JSON extraction, SQLite file type
+and MIME type, page size/count, encoding and schema/user versions, without
+extraction errors or warnings. A second real database covers 65536-byte pages
+and UTF-16LE. Tests also cover content detection without a file extension,
+truncated/invalid headers, and preservation of input bytes. The repository's
+SQLite reader is integrated at build time into ExifTool 13.63.
+
 Pandoc tests verify its bundled version, Markdown-to-HTML formatting and Unicode,
 text extraction from the existing DOCX fixture, Markdown-to-DOCX round-trip text
 preservation, and generation of a two-slide PPTX. The generated PPTX is inspected
@@ -27,6 +36,8 @@ test/
 │   ├── docx1.docx
 │   ├── xlsx1.xlsx
 │   ├── pptx1.pptx
+│   ├── test.db
+│   ├── sqlite-utf16.sqlite3
 │   └── pandoc.md
 ├── exiftool/
 │   └── binaire.spec.ts

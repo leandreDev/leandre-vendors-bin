@@ -1,14 +1,14 @@
 {
   "linux-x64": {
-    "archiveSha256": "20a70ad208d2ca2f49a80dbcc7afad3df4d66a080aca1e7790b632fc18c72a75",
-    "manifestSha256": "7d0ae7fc910c2980d38fd0d38ee2553064b390eda28c7eace8069709444eb61e"
+    "archiveSha256": "5be5c681a99959289890fb05cd84640053897bf30a11574e1c46a4d2cd704c14",
+    "manifestSha256": "9a75627a904e77d482ca2d9a820b8f7fff702f71aec40659aaffe9ae08c96f89"
   },
   "linux-arm64": {
-    "archiveSha256": "16fbf630e7e5af9bdd01e7d3300a5d6e0634601113b12f9ba90af83dd431e0de",
-    "manifestSha256": "ba542e320b60cb233164c43245fe5fcb4506402b976ea3074a65d850ca087551"
+    "archiveSha256": "9de0d4bab78da10b2c1ce48d280de09f49b0d9adabe045656267c1eef4816993",
+    "manifestSha256": "4353027a699a85dc9c32c668f1b942aa9554539cb86dc01041d2e48486c44652"
   },
   "darwin-arm64": {
-    "archiveSha256": "e82f6f42d9d43b22c9b2407a97c17db64f4135ab78c28fb900d782b3a032430c",
-    "manifestSha256": "fc8a007014f2a3fb5a69c47ba154de27fa841895e607a517128f13ef8a5f5407"
+    "archiveSha256": "f5c618e75a03bef2427f4a54b5e87d7f8ebe5c19a6b93634ad9daddb2ff54229",
+    "manifestSha256": "79f38f6cae0bf0dcd70c9ed164f6f0be80810b8e7b5598c94fe0e00de3530abe"
   }
 }
